@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Algoritmos Genéticos</title>
+
+    <script type="module" src="src/app.js"></script>
+    <link rel="stylesheet" href="src/style.css">
+</head>
+
+<body>
+
+<div id="return">
+    <button id="return-to-login">Logout</button>
+</div>
+
+<div id="container">
+    <div id="instructions">
+        <h1>Algoritmos Genéticos de Optimizacion</h1>
+        <p>
+            Prototipo de Interfaz para el nucleo de software de
+            algortimos geneticos de optimizacion.<br>
+            Sube un archivo ".txt", o inserte los valores en el espacio de texto.
+        </p>
+    </div>
+
+    <div id="interface">
+        <h2 id="algorithm-title"></h2>
+        <h3>Selección de Algoritmo</h3>
+        <div>
+            <select class="dropdown" id="algorithm-selector"></select>
+        </div>
+        <br>
+        <button class="hover-bg" id="execute-button">Ejecutar Algoritmo</button>
+        <br><br>
+
+        <h3>Tipo de Configuracion</h3>
+        <div>
+            <select class="dropdown" id="config-selector"></select>
+        </div>
+        <br>
+        <div id="configs">
+            <div id="files">
+                <div id="txt-area">
+                    <textarea id="config-text"></textarea>
+                </div>
+                <div id="send-and-upload">
+                    <input type="file" id="config-file">
+                    <button class="hover-bg" id="send-file-button">
+                        Enviar Config (archivo)
+                    </button>
+                    <button class="hover-bg" id="send-text-button">
+                        Enviar Config (Texto)
+                    </button>
+                    <button class="hover-bg" id="get-config-button">
+                        Descargar Config
+                    </button>
+                </div>
+            </div>
+            <div id="get-output">
+                <h3>Obtener Resultados del Algoritmo</h3>
+                <select class="dropdown" id="output-selector"></select>
+                <button class="hover-bg" id="get-output-button">Obtener Resultado</button>
+            </div>
+            <div id="output-table"></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
