@@ -1,0 +1,41 @@
+# Ignore compiled class files
+*.class
+
+# Ignore JAR files
+*.jar
+*.war
+
+# Ignore build directories
+/build/
+/dist/
+/out/
+
+# Ignore IDE-specific files (for common IDEs)
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# Eclipse
+*.classpath
+*.project
+/.settings/
+bin/
+/target/
+
+# NetBeans
+/nbproject/private/
+/nbproject/Makefile-*
+
+# Ignore logs and temporary files
+*.log
+*.tmp
+*.temp
+
+# Ignore OS-generated files
+.DS_Store
+Thumbs.db
+
+# Ignore local configuration files
+*.local
+*.properties
+
