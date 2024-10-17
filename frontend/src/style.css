@@ -1,0 +1,157 @@
+:root {
+    --algorithm-color: "";
+    --get-output-display: flex;
+}
+
+body {
+    background-color: rgb(199, 199, 199);
+    box-sizing: border-box;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+button{
+    width: 100px;
+    height: 40px;
+    background-color: white;
+    border-radius: 25px;
+}
+
+table, td, th{
+    border: 1px solid black;
+}
+
+.rounded{
+    border-radius: 25px;
+}
+
+.hover-bg:hover {
+    background-color: var(--algorithm-color);
+}
+
+.dropdown {
+    position: relative;
+    display: var(inline-block);
+}
+
+.dropdown-toggle {
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px;
+}
+
+.dropdown-item {
+    padding: 4px 0;
+}
+
+#return {
+    background-color: whitesmoke;
+    display: flex;
+    justify-content: stretch;
+    width: 100%;
+    padding: 10px;
+}
+
+#return-to-login {
+    display: flex;
+    color: #000;
+    text-decoration: none;
+    margin: 0 10px;
+    height: 20px;
+    padding: 10px;
+    border-radius: 25px;
+}
+
+#return-to-login:hover {
+    background-color: rgb(124, 132, 110);
+}
+
+#container {
+    width: 1000px;
+    min-height: 80vh;
+    border-radius: 25px;
+    margin: 7vh auto;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1 1 1;
+    background-color: var(--algorithm-color);
+}
+
+#title {
+    margin: 0px auto;
+}
+
+#execute-button {
+    margin-bottom: 50px;
+}
+
+#interface {
+    margin: 25px auto;
+}
+
+#algorithm-title {
+    margin: 15px;
+}
+
+#instructions {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin: 0px auto;
+}
+
+#configs {
+    min-height: 350px;
+    display: flex;
+    gap: 10px;
+    margin: 0 auto;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+#files {
+    gap: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+#get-output {
+    min-height: 160px;
+    gap: 10px;
+    /* by default hidden, modify --get-output-display var for it's non-hidden display */
+    display: hidden;
+    flex-direction: column;
+    align-items: center;
+}
+
+#execute-button {
+    margin: 0 auto;
+}
+
+#config-text {
+    resize: vertical;
+    min-height: 150px;
+    width: 350px;
+}
+
+#output-table {
+    display: flex;
+    margin: 0 auto;
+}
