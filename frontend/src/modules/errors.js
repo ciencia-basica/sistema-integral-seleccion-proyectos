@@ -1,5 +1,3 @@
-import { redirectTo } from "./user_fetch.js"
-
 export class HttpError extends Error {
     constructor(statusCode, detail, ignoreUserValidation = false) {
         super(`Failed request with code ${statusCode}`);
@@ -13,10 +11,16 @@ export class HttpError extends Error {
         this.date = new Date();
 
         if (!ignoreUserValidation) {
-            const username = sessionStorage.getItem("username");
-            if (detail == `usuario '${username}' no existe`) {
-                // exit app
-                redirectTo("index", "");
+            const email = sessionStorage.getItem("userEmail"); // Cambiado a email en lugar de username
+            if (detail === `usuario con correo '${email}' no existe`) {
+                // Mostrar un mensaje de error si el usuario no existe
+                alert("Este correo no está registrado.");
+            } else if (detail === `usuario con correo '${email}' no verificado`) {
+                // Mostrar un mensaje de error si el correo no está verificado
+                alert("Por favor, verifica tu correo electrónico antes de iniciar sesión.");
+            } else {
+                // Otros errores posibles (contraseña incorrecta, etc.)
+                alert("Error en la solicitud: " + detail);
             }
         }
     }

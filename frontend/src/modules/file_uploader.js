@@ -4,7 +4,7 @@ export function handleFileSelect(event) {
     uploadedFile = event.target.files.length > 0 ? event.target.files[0] : null;
 }
 
-export function getFileContent() {
+export function getFileContent(){
     if (!uploadedFile)
         return Promise.reject("Missing File");
 

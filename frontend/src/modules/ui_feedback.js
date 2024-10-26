@@ -1,6 +1,6 @@
 import { HttpError } from "./errors.js"
 
-export function requestFeedback(request, htmlElem, onSuccesMsg, onErrorMsg) {
+export function requestFeedback(request, htmlElem, onSuccesMsg, onErrorMsg){
     const prevText = htmlElem.innerHTML;
     htmlElem.disabled = true;
     htmlElem.innerHTML = "...";

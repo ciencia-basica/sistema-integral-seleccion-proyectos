@@ -1,6 +1,6 @@
-function addRowToTable(tableElem, ...cells) {
+function addRowToTable(tableElem, ...cells){
     const tr = document.createElement("tr");
-
+    
     cells.forEach(cell => {
         const td = document.createElement("td");
         td.textContent = cell;
@@ -10,7 +10,7 @@ function addRowToTable(tableElem, ...cells) {
     tableElem.appendChild(tr);
 }
 
-export function visualizeOutput(output, outputTableContainerElem) {
+export function visualizeOutput(output, outputTableContainerElem){
     const table = document.createElement("table");
     addRowToTable(table, "Proyecto", "rango");
 
