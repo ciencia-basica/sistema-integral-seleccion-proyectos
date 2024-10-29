@@ -1,78 +1,75 @@
-"""
-Este modulo contiene el manejo de registro y autenticacion de usuarios
-"""
-
 import json
 from typing import Any
 from uuid import UUID, uuid4
-
 from fastapi import HTTPException
-from paths import ENCODING, USER_RECORD
+from user.firebase_config import db  # Importa la configuración de Firebase
 from user.user_storage import del_user_storage, reset_user_storage
 
 
 class UserRecordEnc(json.JSONEncoder):
-    """TODO"""
-
+    """Encode UUID as string."""
     def default(self, o: Any) -> Any:
-        """TODO"""
         if isinstance(o, UUID):
             return str(o)
         return super().default(o)
 
 
 def user_record_dec(o: dict[str, Any]) -> Any:
-    """TODO"""
-    if "__uuid__" in o:
-        return UUID(o["__uuid__"])
+    """Decode JSON to UUID."""
+    if '__uuid__' in o:
+        return UUID(o['__uuid__'])
     return o
 
 
 def _get_user_record() -> dict[str, UUID]:
-    with open(USER_RECORD, "r", encoding=ENCODING) as file:
-        return json.loads(file.read(), object_hook=user_record_dec)["users"]
+    # Lee los registros de usuario de Firestore en lugar del archivo local
+    user_record = {}
+    users_ref = db.collection("users")
+    docs = users_ref.stream()
+    for doc in docs:
+        user_record[doc.id] = UUID(doc.get("id"))
+    return user_record
 
 
 def register_user(user: str) -> None:
-    """TODO"""
+    """Register a new user."""
     if user == "":
-        raise HTTPException(400, detail="Nombre invalid")
+        raise HTTPException(400, detail="Nombre inválido")
 
     user_record = _get_user_record()
     if user in user_record:
         raise HTTPException(400, detail="Usuario ya existe")
 
-    with open(USER_RECORD, "w", encoding=ENCODING) as file:
+    uid = uuid4()
+    while uid in user_record.values():
         uid = uuid4()
-        while uid in user_record.keys():
-            uid = uuid4()
-        user_record[user] = uid
 
-        reset_user_storage(user_record[user])
-        file.write(json.dumps({"users": user_record}, cls=UserRecordEnc))
+    # Guarda en Firestore
+    db.collection("users").document(user).set({"id": str(uid)})
+    reset_user_storage(uid)
 
 
 def delete_user(user: str) -> None:
-    """TODO"""
+    """Delete an existing user."""
     user_record = _get_user_record()
-    if not user in user_record:
+    if user not in user_record:
         raise HTTPException(404, detail="Usuario no existe")
 
-    with open(USER_RECORD, "w", encoding=ENCODING) as file:
-        del_user_storage(user_record[user])
-        del user_record[user]
-        file.write(json.dumps({"users": user_record}, cls=UserRecordEnc))
+    # Elimina de Firestore
+    del_user_storage(user_record[user])
+    db.collection("users").document(user).delete()
 
 
 def is_user(user: str) -> bool:
-    """TODO"""
-    return user in _get_user_record()
+    """Check if a user exists."""
+    user_record = _get_user_record()
+    return user in user_record
 
 
 def get_user_id(user: str) -> UUID:
-    """TODO"""
+    """Get a user's UUID."""
     try:
-        return _get_user_record()[user]
+        user_record = _get_user_record()
+        return user_record[user]
     except KeyError:
-        # pylint: disable=raise-missing-from
         raise HTTPException(status_code=404, detail=f"usuario '{user}' no existe")
