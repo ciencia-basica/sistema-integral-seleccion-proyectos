@@ -3,32 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <title>Inicio de Sesión</title>
-    <script type="module" src="src/login.js"></script>
-    <link rel="stylesheet" href="src/styles_login.css">
+    <script type="module" src="frontend-src/login.js"></script>
+    <link rel="stylesheet" href="frontend-src/styles_login.css">
 </head>
 <body>
     <div id="container">
         <div class="user-act-section">
-            <h1 class="title">Iniciar Sesión</h1>
+            <h3>Iniciar Sesión</h3>
             <div class="fields">
-                <input id="login-user-name" type="text" placeholder="Usuario" required>
+                <input type="email" id="login-email" placeholder="Correo electrónico" />
+                <input type="password" id="login-password" placeholder="Contraseña" />
             </div>
-            <button id="login">Iniciar Sesión</button>
+            <button id="login-app">Iniciar Sesión</button>
         </div>
+        
         <div class="user-act-section">
-            <h1 class="title">Crear Usuario</h1>
+            <h3>Crear Cuenta</h3>
             <div class="fields">
-                <input id="create-user-name" type="text" placeholder="Usuario" required>
+                <input type="email" id="create-account-email" placeholder="Correo electrónico" />
+                <input type="password" id="create-account-password" placeholder="Contraseña" />
             </div>
-            <button id="create-user">Crear Usuario</button>
+            <button id="create-account-button">Crear Cuenta</button>
         </div>
+        
         <div class="user-act-section">
-            <h1 class="title">Eliminar Usuario</h1>
+            <h3>Eliminar Cuenta</h3>
             <div class="fields">
-                <input id="delete-user-name" type="text" placeholder="Usuario" required>
+                <input type="email" id="delete-account-email" placeholder="Correo electrónico" />
+                <input type="password" id="delete-account-password" placeholder="Contraseña" />
             </div>
-            <button id="delete-user">Eliminar Usuario</button>
+            <button id="delete-account">Eliminar Cuenta</button>
         </div>
+        
+        <button id="guest-access">Acceder como Invitado</button>
     </div>
 </body>
 </html>
