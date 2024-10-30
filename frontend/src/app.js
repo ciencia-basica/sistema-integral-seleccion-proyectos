@@ -12,7 +12,7 @@ const ALGORITHMS = [
     "Portfolio level",
 ];
 
-const algorithmCols = ["#8495b9", "#c9b14a", "#66cc99", "#aa6fd1"]
+const algorithmCols = ["#8495b9","#c9b14a","#66cc99","#aa6fd1"]
 
 const algorithmPageColors = ALGORITHMS.reduce((acc, key, idx) => {
     acc[key] = algorithmCols[idx];
@@ -39,38 +39,38 @@ const OUTPUT_DISPLAY_CSSVAR = "--get-output-display";
 
 //DOM Ids
 const IDs = {
-    algorithmTitle: "algorithm-title",
-    algorithmSelector: "algorithm-selector",
-    executeButton: "execute-button",
+    algorithmTitle : "algorithm-title",
+    algorithmSelector : "algorithm-selector",
+    executeButton : "execute-button",
 
-    configSelector: "config-selector",
-    configTextInput: "config-text",
-    configFileInput: "config-file",
-    sendTextButton: "send-text-button",
-    sendFileButton: "send-file-button",
-    getConfigButton: "get-config-button",
+    configSelector : "config-selector",
+    configTextInput : "config-text",
+    configFileInput : "config-file",
+    sendTextButton : "send-text-button",
+    sendFileButton : "send-file-button",
+    getConfigButton : "get-config-button",
 
-    outputContainer: "get-output",
-    outputSelector: "output-selector",
-    getOutputButton: "get-output-button",
-    outputTableContainer: "output-table",
+    outputContainer : "get-output",
+    outputSelector : "output-selector",
+    getOutputButton : "get-output-button",
+    outputTableContainer : "output-table",
 
-    returnLoginButton: "return-to-login",
+    returnLoginButton : "return-to-login",
 };
 
-function fillSelectorOptions(selectorElem, options) {
+function fillSelectorOptions(selectorElem, options){
     selectorElem.innerHTML = "";
     options.forEach(opt => selectorElem.innerHTML += `<option value="${opt}">${opt}</option>\n`);
     selectorElem.value = options[0];
     selectorElem.dispatchEvent(new Event("change"));
 }
 
-function updateOutputSelect(outputSelectorElem, outputContainerElem, selectedAlgorithm) {
+function updateOutputSelect(outputSelectorElem, outputContainerElem, selectedAlgorithm){
     const request = backend.getOutputs(getUser(), selectedAlgorithm);
     request.then(outputs => {
         fillSelectorOptions(outputSelectorElem, outputs);
         const cssvarDisplay = window.getComputedStyle(outputContainerElem)
-            .getPropertyValue(OUTPUT_DISPLAY_CSSVAR);
+                                    .getPropertyValue(OUTPUT_DISPLAY_CSSVAR);
         outputContainerElem.style.display = outputs.length == 0 ? "none" : cssvarDisplay;
     });
 
@@ -117,7 +117,7 @@ document.addEventListener("DOMContentLoaded", _ => {
             requestFeedback(request, elems[IDs.sendFileButton], "Enviado", "Fallido");
         }).catch(_ => {
             const noEvent = new Promise(resolve => resolve());
-            requestFeedback(noEvent, elems[IDs.sendFileButton], "Archivo No Seleccionado", "");
+            requestFeedback(noEvent,elems[IDs.sendFileButton], "Archivo No Seleccionado", "");   
         });
     });
 
@@ -139,7 +139,7 @@ document.addEventListener("DOMContentLoaded", _ => {
         updateOutputSelect(outputSelectorElem, outputContainerElem, selectedAlgorithm).then(_ => {
             request.then(response => {
                 alert(response);
-            });
+            }); 
         });
 
         requestFeedback(request, elems[IDs.executeButton], "Ejecutado", "Fallido");
