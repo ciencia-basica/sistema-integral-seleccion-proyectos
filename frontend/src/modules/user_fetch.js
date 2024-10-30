@@ -1,10 +1,13 @@
-export const USERNAME_KEY = "username";
+// Cambiamos la clave para el correo electrónico
+export const EMAIL_KEY = "userEmail";  // Antes era USERNAME_KEY
 
+// Obtener el email del usuario de sessionStorage
 export function getUser() {
-    return sessionStorage.getItem(USERNAME_KEY);
+    return sessionStorage.getItem(EMAIL_KEY);
 }
 
-export function redirectTo(html, username) {
-    sessionStorage.setItem(USERNAME_KEY, username);
-    window.location.href = `${html}.html`;
+// Redirigir a una página y almacenar el email
+export function redirectTo(html, email) {
+    sessionStorage.setItem(EMAIL_KEY, email);  // Almacenamos el correo en sessionStorage
+    window.location.href = `${html}.html`;  // Redirigimos a la página correspondiente
 }
