@@ -46,11 +46,15 @@ def get_user(user_id: uuid.UUID) -> dict:
     return user_doc.to_dict() if user_doc.exists else None
 
 
+
 def del_user_storage(user_id: uuid.UUID) -> None:
     """Elimina el directorio de archivos del usuario especificado."""
-    if path.exists(get_user_path(user_id)):
-        shutil.rmtree(get_user_path(user_id))
-    db.collection(USERS_COLLECTION).document(get_user_path(user_id)).delete()  # Elimina el usuario de Firestore
+    user_path = get_user_path(user_id)
+    if path.exists(user_path):
+        shutil.rmtree(user_path)
 
-
-
+    user_doc = db.collection(USERS_COLLECTION).document(str(user_id)).get()
+    if user_doc.exists:
+        db.collection(USERS_COLLECTION).document(str(user_id)).delete()
+    else:
+        print(f"Usuario {user_id} no existe en Firestore.")
