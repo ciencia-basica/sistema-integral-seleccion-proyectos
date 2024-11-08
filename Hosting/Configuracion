@@ -1,0 +1,47 @@
+#Cambiar la ruta del archivo .pem
+
+ssh -i "ruta/a/tu/archivo.pem" ubuntu@52.14.245.189
+
+#Porcion de HTTPS:
+
+sudo apt-get update
+sudo apt-get install nginx
+sudo apt-get install certbot python3-certbot-nginx
+sudo certbot --nginx
+sudo certbot renew --dry-run
+
+#Portfowarding y faltan las rutas correctas del SSL:
+
+sudo nano /etc/nginx/sites-available/default
+
+# Configuración para redirigir el tráfico HTTP a HTTPS
+server {
+    listen 80;
+    server_name www.decisionesanaliticas.com;
+
+    # Redirige todo el tráfico HTTP a HTTPS
+    return 301 https://$host$request_uri;
+}
+
+# Configuración del servidor HTTPS
+server {
+    listen 443 ssl;
+    server_name www.decisionesanaliticas.com;
+
+    # Rutas a los certificados SSL de Let's Encrypt
+    ssl_certificate /etc/letsencrypt/live/decisionesanaliticas.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/decisionesanaliticas.com/privkey.pem;
+
+    # Configuraciones adicionales para seguridad SSL
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_ciphers "EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH";
+
+    # Configurar el proxy para el backend en el puerto 3000
+    location / {
+        proxy_pass http://localhost:3000;  # Redirige a la aplicación en el puerto 3000
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
