@@ -17,7 +17,7 @@ sudo nano /etc/nginx/sites-available/default
 # Configuración para redirigir el tráfico HTTP a HTTPS
 server {
     listen 80;
-    server_name www.decisionesanaliticas.com;
+    server_name www.decisionesanaliticas.com decisionesanaliticas.com;
 
     # Redirige todo el tráfico HTTP a HTTPS
     return 301 https://$host$request_uri;
@@ -26,7 +26,7 @@ server {
 # Configuración del servidor HTTPS
 server {
     listen 443 ssl;
-    server_name www.decisionesanaliticas.com;
+    server_name www.decisionesanaliticas.com decisionesanaliticas.com;
 
     # Rutas a los certificados SSL de Let's Encrypt
     ssl_certificate /etc/letsencrypt/live/decisionesanaliticas.com/fullchain.pem;
@@ -35,6 +35,13 @@ server {
     # Configuraciones adicionales para seguridad SSL
     ssl_protocols TLSv1.2 TLSv1.3;
     ssl_ciphers "EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH";
+    ssl_prefer_server_ciphers on;  # Prioriza los cifrados del servidor
+
+    # Seguridad adicional
+    add_header Strict-Transport-Security "max-age=63072000; includeSubDomains; preload" always;
+    add_header X-Content-Type-Options nosniff;
+    add_header X-Frame-Options DENY;
+    add_header X-XSS-Protection "1; mode=block";
 
     # Configurar el proxy para el backend en el puerto 3000
     location / {
