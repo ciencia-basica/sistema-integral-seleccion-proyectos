@@ -70,7 +70,14 @@ public class Utilities {
     public static String[][] readFile(String folderPath, String fileName, String separator) {
     Path path = Paths.get(folderPath, fileName);  // Construimos la ruta usando el folderPath y el nombre del archivo
     return readFile(path, separator);  // Llamamos al método ya existente que usa Path
-    
+    /*try {
+        String content = new String(Files.readAllBytes(Paths.get(path)));
+        System.out.println("File read successfully: " + path);
+        return content;
+    } catch (IOException e) {
+        System.err.println("Error reading file at " + path + ": " + e.getMessage());
+        return null;
+    }*/
     }
 
     public static String[][] readFile(Path path, String separator){
