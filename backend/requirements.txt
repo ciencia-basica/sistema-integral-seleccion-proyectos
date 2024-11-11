@@ -21,3 +21,9 @@ tomlkit==0.13.0
 typing_extensions==4.12.2
 uuid==1.30
 uvicorn==0.30.5
+nginx==1.18.0-0ubuntu1
+certbot==1.22.0
+python3-certbot-nginx==1.22.0
+python3-acme==1.22.0
+python3-cryptography==3.4.7
+openssl==1.1.1f-1ubuntu2
