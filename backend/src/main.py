@@ -24,7 +24,6 @@ from paths import ERRORS_LOG
 from routers import algorithm, user
 
 # API
-
 app = FastAPI()
 
 app.add_middleware(
@@ -40,7 +39,7 @@ app.add_middleware(
 async def exception_middleware(
     request: Request, call_next: Callable[[Request], Awaitable[Any]]
 ):
-    """TODO"""
+    """Manejo de excepciones globales"""
     try:
         return await call_next(request)
     except Exception as e:  # pylint: disable=broad-except
@@ -55,12 +54,11 @@ app.include_router(algorithm.router)
 
 @app.get("/")
 async def root() -> dict[str, str]:
-    """Root de la api"""
+    """Root de la API"""
     return {"response": "root"}
 
 
 # Logging
-
 logging.basicConfig(
     level=logging.ERROR,
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
@@ -69,16 +67,7 @@ logging.basicConfig(
     ],
 )
 
-# SSL
-
-SSL_ENABLED = False
-SSL_CERT = "cert.pem"
-SSL_KEY = "key.pem"
-
+# Ejecución del servidor
 if __name__ == "__main__":
-    if SSL_ENABLED:
-        uvicorn.run(
-            app, host="127.0.0.1", port=8000, ssl_certfile=SSL_CERT, ssl_keyfile=SSL_KEY
-        )
-    else:
-        uvicorn.run(app, host="127.0.0.1", port=8000)
+    # No es necesario SSL en FastAPI ya que NGINX maneja la terminación SSL
+    uvicorn.run(app, host="0.0.0.0", port=8000)  # Escucha en todas las interfaces, puerto 8000
