@@ -61,30 +61,66 @@ export async function existsUser(username) {
     return parsedResponse.exists;
 }
 
-export async function registerUser(username) {
-    const fetchURI = `${API_URI}/user/${username}`;
+export async function loginUser(email, password) {
+    const fetchURI = `${API_URI}/user/login`;
+    const body = JSON.stringify({ email, password });
 
-    const response = await fetch(fetchURI, { method: "POST" });
+    const response = await fetch(fetchURI, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: body
+    });
+
+    const parsedResponse = await response.json();
+    if (!response.ok) 
+        throw new HttpError(response.status, parsedResponse);
+    
+    validateResponseFormat(parsedResponse, { "login_success": true });
+
+    return parsedResponse.login_success;
+}
+
+//Register user with email and password
+export async function registerUser(email, password){
+    const fetchURI = `${API_URI}/user/register`;
+    const body = JSON.stringify({ email, password });
+
+    const response = await fetch(fetchURI, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: body
+    });
     const parsedResponse = await response.json();
 
     if (!response.ok)
         throw new HttpError(response.status, parsedResponse);
 
-    validateResponseFormat(parsedResponse, { "response": "" });
+    validateResponseFormat(parsedResponse, {"response":""});
 
     return parsedResponse.response;
 }
 
-export async function deleteUser(username) {
-    const fetchURI = `${API_URI}/user/${username}`;
+export async function deleteUser(email, password){
+    const fetchURI = `${API_URI}/user/delete`;
+    const body = JSON.stringify({email, password});
 
-    const response = await fetch(fetchURI, { method: "DELETE" });
+    const response = await fetch(fetchURI, {
+        method:"DELETE",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body:body
+    });
     const parsedResponse = await response.json();
 
     if (!response.ok)
         throw new HttpError(response.status, parsedResponse);
 
-    validateResponseFormat(parsedResponse, { "response": "" });
+    validateResponseFormat(parsedResponse, {"response":""});
 
     return parsedResponse.response;
 }
