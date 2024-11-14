@@ -69,9 +69,10 @@ table, td, th{
     color: #000;
     text-decoration: none;
     margin: 0 10px;
-    height: 20px;
+    height: 40px;
     padding: 10px;
     border-radius: 25px;
+    font-size: 18px;
 }
 
 #return-to-login:hover {

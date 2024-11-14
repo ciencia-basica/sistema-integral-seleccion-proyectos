@@ -4,14 +4,19 @@ import { redirectTo } from "./modules/user_fetch.js"
 
 //DOM Ids
 const IDs = {
-    loginUsername: "login-user-name",
-    loginButton: "login",
+    loginEmail: "login-email",
+    loginPassword: "login-password",
+    loginButton: "login-app",
 
-    createUsername: "create-user-name",
-    createUserButton: "create-user",
+    createAccountEmail: "create-account-email",
+    createAccountPassword: "create-account-password",
+    createAccountButton: "create-account-button",
 
-    deleteUsername: "delete-user-name",
-    deleteUserButton: "delete-user",
+    deleteAccountEmail: "delete-account-email",
+    deleteAccountPassword: "delete-account-password",
+    deleteAccountButton: "delete-account",
+
+    guestAccessButton: "guest-access"
 };
 
 document.addEventListener("DOMContentLoaded", _ => {
@@ -20,35 +25,60 @@ document.addEventListener("DOMContentLoaded", _ => {
         return output;
     }, {});
 
+    // Login
     elems[IDs.loginButton].addEventListener("click", _ => {
-        const username = elems[IDs.loginUsername].value;
-        const request = backend.existsUser(username);
+        const email = elems[IDs.loginEmail].value;
+        const password = elems[IDs.loginPassword].value;
+
+        if (email === "" || password === "") {
+            alert("Por favor, rellena todos los campos.");
+            return;
+        }
+
+        const request = backend.loginUser(email, password); // Cambiar a función que maneje login en backend
         requestFeedback(request, elems[IDs.loginButton], "", "Error");
-        request.then(exists => {
-            if (!exists) {
-                alert("Usuario no encontrado");
+        request.then(success => {
+            if (!success) {
+                alert("Correo o contraseña invalido");
                 return;
             }
-            redirectTo("app", username);
+            redirectTo("app", email);
         });
     });
 
-    elems[IDs.createUserButton].addEventListener("click", _ => {
-        const username = elems[IDs.createUsername].value;
-        const request = backend.registerUser(username);
-        requestFeedback(request, elems[IDs.createUserButton], "", "Error");
+    // Crear cuenta
+    elems[IDs.createAccountButton].addEventListener("click", _ => {
+        const email = elems[IDs.createAccountEmail].value;
+        const password = elems[IDs.createAccountPassword].value;
+
+        if (email === "" || password === "") {
+            alert("Por favor, rellena todos los campos.");
+            return;
+        }
+
+        const request = backend.registerUser(email, password);
+        requestFeedback(request, elems[IDs.createAccountButton], "", "Error");
+
         request.then(response => {
-            alert(response);
-            redirectTo("app", username);
+            alert("Por favor, confirma tu correo electrónico.");
+        }).catch(error => {
+            alert("Error: " + error.detail);
         });
     });
 
-    elems[IDs.deleteUserButton].addEventListener("click", _ => {
-        const username = elems[IDs.deleteUsername].value;
-        const request = backend.deleteUser(username);
-        requestFeedback(request, elems[IDs.deleteUserButton], "", "Error");
+    // Eliminar cuenta
+    elems[IDs.deleteAccountButton].addEventListener("click", _ => {
+        const email = elems[IDs.deleteAccountEmail].value;
+        const password = elems[IDs.deleteAccountPassword].value;
+        const request = backend.deleteUser(email, password); // Cambiar a función que elimine en backend
+        requestFeedback(request, elems[IDs.deleteAccountButton], "", "Error");
         request.then(response => {
-            alert(response);
+            alert("Cuenta eliminada exitosamente.");
         });
+    });
+
+    // Acceso como invitado
+    elems[IDs.guestAccessButton].addEventListener("click", _ => {
+        redirectTo("app", "guest");
     });
 });
