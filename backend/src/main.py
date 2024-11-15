@@ -40,6 +40,7 @@ async def exception_middleware(
     request: Request, call_next: Callable[[Request], Awaitable[Any]]
 ):
     """Manejo de excepciones globales"""
+    """Manejo de excepciones globales"""
     try:
         return await call_next(request)
     except Exception as e:  # pylint: disable=broad-except
@@ -55,6 +56,7 @@ app.include_router(algorithm.router)
 @app.get("/")
 async def root() -> dict[str, str]:
     """Root de la API"""
+    """Root de la API"""
     return {"response": "root"}
 
 
@@ -67,6 +69,7 @@ logging.basicConfig(
     ],
 )
 
+# Ejecución del servidor
 # Ejecución del servidor
 if __name__ == "__main__":
     # No es necesario SSL en FastAPI ya que NGINX maneja la terminación SSL

@@ -402,6 +402,21 @@ public class Initializer {
                 classes[i][classPos] = readingClasses[classPos][0];
             }
         }
+        /*  try {
+                initializeDatabase();
+                System.out.println("Database initialized successfully.");
+        } catch (Exception e) {
+            System.err.println("Error initializing the database: " + e.getMessage());
+        }
+
+            try {
+                initializeStorage();
+                System.out.println("Storage initialized successfully.");
+        } catch (Exception e) {
+            System.err.println("Error initializing storage: " + e.getMessage());
+        }
+        }
+         */
     }
     
     /**
