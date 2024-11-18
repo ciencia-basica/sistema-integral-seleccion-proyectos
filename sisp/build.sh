@@ -1,3 +1,7 @@
-ant clean
-ant jar
-cp dist/P11.HierarchicalOutranking.jar dist/executable.jar
+#!/bin/bash
+
+set -e
+
+cd "$(dirname "${BASH_SOURCE[0]}")" || exit 1
+
+ant clean jar
