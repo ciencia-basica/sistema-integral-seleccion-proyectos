@@ -10,9 +10,9 @@
 # exit on err
 set -e
 
-./install-dependencies.sh
-
 cd "$(dirname "${BASH_SOURCE[0]}")" || exit 1
+
+./install-dependencies.sh
 
 # nginx and https config
 sudo nginx -t
