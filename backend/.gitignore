@@ -1,7 +1,7 @@
-*user_storage/
-*venv/
+*user_storage
+*venv
 
-*__pycache__/
+*__pycache__
 *.txt
 *.xlsx
 *.json
@@ -9,7 +9,5 @@
 *.jar
 *.pem
 *.swp
-
-.rgignore
 
 !requirements.txt
