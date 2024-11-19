@@ -9,7 +9,6 @@ Commando de ejecucion:
 uvicorn main:app --reload
 # Production
 python3 main.py
-uvicorn main:app --ssl-keyfile key.pem --ssl-certfile cert.pem
 """
 
 import logging
@@ -20,6 +19,7 @@ import uvicorn
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+
 from paths import ERRORS_LOG
 from routers import algorithm, user
 
@@ -69,16 +69,5 @@ logging.basicConfig(
     ],
 )
 
-# SSL
-
-SSL_ENABLED = False
-SSL_CERT = "cert.pem"
-SSL_KEY = "key.pem"
-
 if __name__ == "__main__":
-    if SSL_ENABLED:
-        uvicorn.run(
-            app, host="127.0.0.1", port=8000, ssl_certfile=SSL_CERT, ssl_keyfile=SSL_KEY
-        )
-    else:
-        uvicorn.run(app, host="127.0.0.1", port=8000)
+    uvicorn.run(app, host="127.0.0.1", port=8000)
