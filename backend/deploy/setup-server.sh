@@ -17,6 +17,7 @@ cd "$(dirname "${BASH_SOURCE[0]}")" || exit 1
 # nginx and https config
 sudo nginx -t
 sudo systemctl restart nginx
+sudo cp cors_support /etc/nginx/conf.d/
 
 # http and https traffic must be enabled
 sudo certbot --nginx \
