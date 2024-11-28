@@ -67,6 +67,12 @@ public class Utilities {
         //countInconsCredMatrix_Ranking(readingFile_credibility, 0.59, readingFile_ranking);
     }
 
+    public static String[][] readFile(String folderPath, String fileName, String separator) {
+    Path path = Paths.get(folderPath, fileName);  // Construimos la ruta usando el folderPath y el nombre del archivo
+    return readFile(path, separator);  // Llamamos al método ya existente que usa Path
+    
+    }
+
     public static String[][] readFile(Path path, String separator){
         String[][] data = null;
 
@@ -102,13 +108,18 @@ public class Utilities {
         return data;
     }
 
-    public static void saveFile(Path path, String[][] file, String separator){
+    public static void saveFile(String folderPath, String fileName, String[][] fileData, String separator) {
+        Path path = Paths.get(folderPath, fileName);  // Construimos la ruta usando el folderPath y el nombre del archivo
+        saveFile(path, fileData, separator);  // Llamamos al método ya existente que usa Path
+    }
+
+    public static void saveFile(Path path, String[][] fileData, String separator){
         PrintWriter pw;
         try {
             pw = new PrintWriter(new FileOutputStream(new File(path.toString()), false /* append = false */));
-            for (int i = 0; i < file.length; i++) {
-                for (int j = 0; j < file[i].length; j++) {
-                    pw.append(file[i][j]+separator);
+            for (int i = 0; i < fileData.length; i++) {
+                for (int j = 0; j < fileData[i].length; j++) {
+                    pw.append(fileData[i][j]+separator);
                 }
                 pw.append("\n");
             }
@@ -117,7 +128,7 @@ public class Utilities {
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Utilities.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println("Sorting saved at " + path);
+        System.out.println("File saved at " + path);
         
     }
 

@@ -40,7 +40,7 @@ public class Initializer {
         Initializer application = new Initializer();
         int activityID;
 
-        if(args.length != 1){
+        if(args.length != 2){
             application.printUsage();
             System.exit(1);
         }
@@ -53,10 +53,10 @@ public class Initializer {
             return;
         }
 
-        Path filesDir = Paths.get(System.getProperty("user.dir"), "Files");
+        Path filesDir = Paths.get(args[1]);
         String separator = "\t";
         
-        System.out.println("Reading files");
+        System.out.println("Reading files from: " + filesDir.toString());
         switch (activityID) {
             case 1:
                 application.projectLevel(filesDir, separator);
@@ -89,6 +89,8 @@ public class Initializer {
         System.out.println("    2  Portfolio level");
         System.out.println("    3  Both levels");
         System.out.println("    4  Credibility matrix");
+        System.out.println("    5  Sorting");
+        System.out.println("  [folderPath]  The path to the folder containing the files.");
     }
 
     void projectLevel(Path filesDir, String separator){
