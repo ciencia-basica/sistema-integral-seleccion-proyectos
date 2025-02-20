@@ -1,0 +1,15 @@
+*user_storage/
+*venv/
+
+*__pycache__/
+*.txt
+*.xlsx
+*.json
+*.log
+*.jar
+*.pem
+*.swp
+
+.rgignore
+
+!requirements.txt
