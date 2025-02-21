@@ -1,5 +1,7 @@
+*.xlsx
 *.txt
 *.json
 *.zip
+*.jar
 
 !requirements.txt

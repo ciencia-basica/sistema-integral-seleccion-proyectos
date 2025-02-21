@@ -1,16 +1,25 @@
 # Servicio-Becario-Algoritmos Backend
 
-Contiene el codigo de la API del backend, junto con la implementacion de la comunicacion entre el 
-ejecutable de algoritmos, y la logica de la interfaz.
+Contiene el codigo de la API del backend, expone una interfaz para la
+comunicacion entre el ejecutable de algoritmos, y la logica de la interfaz.
+
+### Dependencias
+
+La api utilize minimamene la version 3.12 de python, tambien require un java
+runtime, se sugiere JDK 21. La api usa el framework FastAPI, esta y las demas
+dependencias de python estan especificadas en requirements.txt
 
 ### Ejecucion del Backend
 
-Descargar python 3.13, y tenrer Java instalado, version minima 1.8, crear un virtual enviroment y configurar las dependencias especificadas en requirements.txt
+Instalar previamente las dependencias, luego crea un virtual environment e
+instala las dependencias de python:
+
 ```bash
-cd backend-src
+cd backend
 
 python -m venv venv
 
+# activa el virtual environment
 # windows
 #.\venv\Scripts\activate
 # Linux/Mac
@@ -22,5 +31,10 @@ pip install -r requirements.txt
 Ejecutar backend utilizando uvicorn
 
 ```bash
+py src/main.py
+
+# u opcionalmente
+
+cd src
 uvicorn main:app --reload
 ```
