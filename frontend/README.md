@@ -1,8 +1,19 @@
 # Servicio-Becario-Algoritmos
 
-Aplicación web de interfaz, para los algoritmos genéticos de toma de decisiones, se comunica con la api del backend para poder.
-Debe ser ejecutado en un servidor.
+Interfaz web para el Sistema Integral de Seleccion de Proyectos, se comunica
+con la api del backend para interactuar con el programa del SISP.
+
+### Ejecucion
+
+La pagina debe set ejecutada dentro de un servidor http. Este se puede utilizar
+por medio del modulo http.server de python:
+
+```bash
+cd frontend
+
+python3 -m server.http -b 127.0.0.1 8080
+```
 
 ### Host de la interfaz WEB
 
-[Sitio web](https://yoaquinjs.github.io/Servicio-Becario-Algoritmos)
+[Sitio web](https://ciencia-basica.github.io/sistema-integral-seleccion-proyectos/frontend/)
