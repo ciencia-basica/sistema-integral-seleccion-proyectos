@@ -159,3 +159,5 @@ document.addEventListener("DOMContentLoaded", _ => {
         requestFeedback(request, elems[IDs.getOutputButton], "Obtenido", "Fallido");
     });
 });
+
+let lol;
