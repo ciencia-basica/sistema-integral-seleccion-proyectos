@@ -7,6 +7,7 @@ from typing import Any
 from uuid import UUID, uuid4
 
 from fastapi import HTTPException
+
 from paths import ENCODING, USER_RECORD
 from user.user_storage import del_user_storage, reset_user_storage
 

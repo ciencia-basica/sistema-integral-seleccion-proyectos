@@ -38,3 +38,13 @@ py src/main.py
 cd src
 uvicorn main:app --reload
 ```
+
+### Analizador estatico y Formatter de codigo
+
+El proyecto utilize pylint como linter (analizador de codigo estatico), para
+filtrar errores comunes y mantener un alto estandar de codigo. Ademas para
+mantener consistencia se utilize como formatters isort y black.
+
+La configuracion de estas herramientas depende del entorno de cada
+desarrollador. Las versiones estan configuradas como depndencias en
+requirements.txt.

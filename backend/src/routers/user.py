@@ -3,6 +3,7 @@ Contiene los endpoint relacionados a los usuarios
 """
 
 from fastapi import APIRouter
+
 from user.user_auth import delete_user, get_user_id, is_user, register_user
 from user.user_storage import assert_user_storage, reset_user_storage
 

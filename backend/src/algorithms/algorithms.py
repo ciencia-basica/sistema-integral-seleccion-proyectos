@@ -6,8 +6,9 @@ from os import listdir, path
 from typing import Callable
 from uuid import UUID
 
-from algorithms.base_algorithm import ExecAlgorithm
 from fastapi import HTTPException
+
+from algorithms.base_algorithm import ExecAlgorithm
 from paths import TXT_EXT
 
 
